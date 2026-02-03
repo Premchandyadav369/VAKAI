@@ -32,8 +32,6 @@ We utilize a **Hybrid Agentic Architecture** that combines:
 ## 🏗️ Architecture
 
 The system operates on a dual-engine agentic workflow:
-
-```mermaid
 graph TD
     A[User Audio Upload (File/URL)] --> B{Agentic Dispatcher}
     
