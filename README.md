@@ -1,4 +1,4 @@
-# VAK-AI: The Agentic Indic Voice Sentinel 🛡️🇮🇳
+# VAK-AI: The Agentic Indic Voice Sentinel
 
 > **Hackathon Submission Level 2**
 > **Tagline**: *Unmasking the Synthetic Silence with Hybrid Intelligence.*
@@ -14,29 +14,7 @@ It uses a unique **Hybrid Architecture**:
 
 ---
 
-## 🏗️ Architecture
 
-The system operates on a dual-engine agentic workflow:
-
-```mermaid
-graph TD
-    A[User Audio Upload (File/URL)] --> B{Agentic Dispatcher}
-    
-    subgraph "Local Sensory Cortex"
-        B --> C[Decoder (Librosa)]
-        C --> D[Wav2Vec2-XLSR-53]
-        D --> E[Feature Extraction]
-        E --> F[Neural Variance & Embedding Norm]
-    end
-    
-    subgraph "Reasoning Neocortex (Groq LPU)"
-        F --> G[Forensic Prompt Construction]
-        G --> H[Llama-3.3-70b-Versatile]
-        H --> I[Contextual Verdict Generation]
-    end
-    
-    I --> J[Final JSON Response]
-```
 
 ### 🧠 The Engines
 1.  **The "Ears" (Sensation)**: `facebook/wav2vec2-large-xlsr-53`
