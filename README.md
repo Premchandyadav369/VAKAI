@@ -1,19 +1,39 @@
-# VAK-AI: The Agentic Indic Voice Sentinel
+# VAK-AI: The Agentic Indic Voice Sentinel 🛡️🇮🇳
 
-> **Hackathon Submission Level 2**
+> **Team**: RED-DRAGON  
 > **Tagline**: *Unmasking the Synthetic Silence with Hybrid Intelligence.*
 
 ---
 
-## 🚀 Basic Description
-**VAK-AI** is a high-performance, agentic AI voice detector designed to identify deepfake audio. It is specifically optimized for **Indic languages** (Telugu, Hindi, Tamil) where traditional detectors often fail. 
+## 👥 Team Members (RED-DRAGON)
 
-It uses a unique **Hybrid Architecture**:
-1.  **Local Acoustic Engine (XLSR-53)**: A massive 1.2GB model that extracts physical "neural variance" features to detect the mathematical "perfectness" of AI speech.
-2.  **Reasoning Engine (Groq LPU)**: A **Llama-3.3** agent running on Groq's ultra-fast hardware acting as a forensic analyst to provide instantaneous, human-readable verdicts.
+| Name | Role | Email |
+| :--- | :--- | :--- |
+| **V C Premchand Yadav** | **Admin / Lead Architect** | [Hidden for Privacy] |
+| **EDUPULAPATI SAI PRANEETH** | **Member / Backend Developer** | [Hidden for Privacy] |
+| **P R Kiran Kumar Reddy** | **Member / Model Engineer** | [Hidden for Privacy] |
+| **Mohith Reddy** | **Member / Frontend Developer** | [Hidden for Privacy] |
+
 
 ---
-## 🚀 Architecture
+
+## 🚀 Project Overview
+
+**VAK-AI** is a high-performance **Agentic AI Voice Detection System** explicitly engineered to combat the rising threat of **Deepfake Audio** in the Indic digital ecosystem. 
+
+Traditional detectors are biased towards English datasets and often fail to distinguish the complex tonal variations of Indian languages (Telugu, Hindi, Tamil) from robotic artifacts. **VAK-AI solves this problem.**
+
+We utilize a **Hybrid Agentic Architecture** that combines:
+1.  **Local Sensory Intelligence (The "Ears")**: A massive **1.2GB XLSR-53** multilingual model that dissects raw audio waveforms to detect **"Neural Uniformity"**—the mathematical consistency found in AI speech but absent in biological human voices.
+2.  **Groq LPU™ Reasoning (The "Brain")**: A highly specialized **Llama-3.3-70b Agent** running on Groq's Language Processing Unit. It acts as a **Forensic Pathologist**, analyzing the acoustic features in millisecond real-time to generate a human-readable verdict explaining *why* a clip is fake.
+
+---
+
+## 🏗️ Architecture
+
+The system operates on a dual-engine agentic workflow:
+
+```mermaid
 graph TD
     A[User Audio Upload (File/URL)] --> B{Agentic Dispatcher}
     
@@ -26,32 +46,33 @@ graph TD
     
     subgraph "Reasoning Neocortex (Groq LPU)"
         F --> G[Forensic Prompt Constructor]
-        G --> H[LLM Inference Engine]
+        G --> H[LLM Inference Engine (Llama-3.3)]
         H --> I[Anomaly Scoring & Explanation]
     end
     
     I --> J[Final Report + Confidence Score]
+```
 
-
-### 🧠 The Engines
+### 🧠 The Engines Explained
 1.  **The "Ears" (Sensation)**: `facebook/wav2vec2-large-xlsr-53`
-    *   **Why**: It's the gold standard for cross-lingual speech representation. It perceives the *texture* of the sound.
-    *   **What it detects**: Neural Uniformity. AI voices are "too perfect"—mathematically consistent in a way human vocal cords never are. VAK-AI measures this variance.
+    *   **Why**: It is the gold standard for cross-lingual speech representation, trained on 53 languages. It doesn't analyze words; it analyzes the *physics* of the sound wave.
+    *   **The Theory**: **Neural Uniformity**. AI models generate audio that is statistically "too perfect." Human voices have biological irregularities (stochasticity). VAK-AI measures this variance.
 
 2.  **The "Brain" (Perception)**: `Groq LPU (Llama-3.3-70b)`
-    *   **Why**: Speed and Logic. Groq's LPU provides near-instant inference.
-    *   **Agentic Role**: It acts as a forensic pathologist, contextualizing raw acoustic numbers to conclude: *"Low variance confirms synthetic origin despite natural-sounding pitch."*
+    *   **Why**: Speed and Logic. Standard LLMs are too slow for real-time security. Groq's LPU provides near-instant inference.
+    *   **Agentic Role**: It takes the raw numbers (e.g., Variance: 0.12) and contextualizes them.
+        *   *Scenario*: "This Telugu clip has natural pitch but suspicious uniformity in the high frequencies. Verdict: **AI Generated**."
 
 ---
 
 ## 🇮🇳 The Indic Advantage
 
-Most AI detectors fail on Indian languages because they misinterpret regional pitch modulations as "robotic."
+Most AI detectors fail on Indian languages because they misinterpret regional pitch modulations as "robotic artifacts."
 
 **VAK-AI calculates language-agnostic neural signatures.**
-*   A Telugu speaker's natural modulation has high variance. 
-*   A Telugu *Deepfake* has low variance.
-By focusing on the *consistency* of the signal rather than the content, VAK-AI works seamlessly across **Telugu, Hindi, Kannada, Tamil, and Malayalam** zero-shot.
+*   A Telugu speaker's natural modulation has **high variance** (biological).
+*   A Telugu *Deepfake* has **low variance** (algorithmic).
+By focusing on the *consistency* of the signal rather than the linguistic content, VAK-AI works seamlessly across **Telugu, Hindi, Kannada, Tamil, and Malayalam** in zero-shot scenarios.
 
 ---
 
@@ -65,16 +86,16 @@ By focusing on the *consistency* of the signal rather than the content, VAK-AI w
 *Alternative*: `Authorization: Bearer indic-ai-voice-2026`
 
 ### Request Format
-Accepts either Base64 string OR a direct URL.
+Accepts either Base64 string OR a direct URL (Evaluator Friendly).
 
-**Option 1 (Base64):**
+**Option 1 (Base64 - Standard):**
 ```json
 {
   "audio_base64": "UklGRi..."
 }
 ```
 
-**Option 2 (URL - Great for Testers):**
+**Option 2 (URL - Tester Friendly):**
 ```json
 {
   "audio_url": "https://example.com/sample.mp3"
@@ -114,7 +135,7 @@ GROQ_API_KEY=your_groq_key_here
 ```
 
 ### 3. Deploy
-*   **Docker**: The repo includes a production `Dockerfile` with `libsndfile1` pre-installed.
+*   **Docker**: The repo includes a production `Dockerfile` with `libsndfile1` pre-installed for universal audio decoding.
 *   **Railway**: Connect GitHub repo -> Auto-detects Dockerfile -> Deploys.
 *   **Render**: Create Web Service -> Environment: Docker -> Deploys.
 
