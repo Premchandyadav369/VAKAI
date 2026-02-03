@@ -112,19 +112,33 @@ async def health():
 async def detect_voice(request: DetectRequest, api_key: str = Depends(verify_api_key)):
     """
     Detect if audio is AI-generated or human.
-    Accepts either 'audio_base64' or 'audio_url'.
+    Accepts either 'audio_base64' (raw base64 OR url) or 'audio_url'.
     """
     try:
-        final_audio_base64 = request.audio_base64
+        final_audio_base64 = None
+        input_data = request.audio_base64
 
-        # Handle URL input if base64 missing
-        if not final_audio_base64 and request.audio_url:
-            try:
-                # 5-second timeout for security
-                response = requests.get(request.audio_url, timeout=5)
+        # CASE 1: Tester sends URL in audio_base64 field
+        if input_data and (input_data.startswith("http://") or input_data.startswith("https://")):
+             # It's actually a URL!
+             try:
+                response = requests.get(input_data, timeout=10)
                 response.raise_for_status()
                 final_audio_base64 = base64.b64encode(response.content).decode('utf-8')
-            except Exception as download_err:
+             except Exception as download_err:
+                 raise HTTPException(status_code=400, detail=f"Failed to download audio from URL: {str(download_err)}")
+        
+        # CASE 2: Real Base64
+        elif input_data:
+             final_audio_base64 = input_data
+
+        # CASE 3: Explicit audio_url field (for our own testing)
+        elif request.audio_url:
+             try:
+                response = requests.get(request.audio_url, timeout=10)
+                response.raise_for_status()
+                final_audio_base64 = base64.b64encode(response.content).decode('utf-8')
+             except Exception as download_err:
                  raise HTTPException(status_code=400, detail=f"Failed to download audio from URL: {str(download_err)}")
 
         if not final_audio_base64:
@@ -141,6 +155,7 @@ async def detect_voice(request: DetectRequest, api_key: str = Depends(verify_api
         result = detector.predict(final_audio_base64)
         
         return result
+
         
     except HTTPException as he:
         raise he
