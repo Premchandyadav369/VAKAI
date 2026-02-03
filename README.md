@@ -13,7 +13,24 @@ It uses a unique **Hybrid Architecture**:
 2.  **Reasoning Engine (Groq LPU)**: A **Llama-3.3** agent running on Groq's ultra-fast hardware acting as a forensic analyst to provide instantaneous, human-readable verdicts.
 
 ---
-
+## 🚀 Architecture
+graph TD
+    A[User Audio Upload (File/URL)] --> B{Agentic Dispatcher}
+    
+    subgraph "Local Sensory Cortex"
+        B --> C[Decoder (Librosa)]
+        C --> D[Wav2Vec2-XLSR-53]
+        D --> E[Acoustic Feature Extraction]
+        E --> F[Embedding Norm & Neural Variance]
+    end
+    
+    subgraph "Reasoning Neocortex (Groq LPU)"
+        F --> G[Forensic Prompt Constructor]
+        G --> H[LLM Inference Engine]
+        H --> I[Anomaly Scoring & Explanation]
+    end
+    
+    I --> J[Final Report + Confidence Score]
 
 
 ### 🧠 The Engines
